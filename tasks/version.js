@@ -14,14 +14,18 @@ module.exports = function(grunt) {
       jsHandle: ''
     });
 
+    var checkJs = options.js;
+
     var scriptsPhp = options.file;
 
     // Hash the CSS
     var hashCss = md5(options.css);
 
     // Hash the JS
-    var hashJs = md5(options.js);
-
+    if(checkJs != '') {
+      var hashJs = md5(options.js);
+    }
+    
     // Update scripts.php to reference the new versions
     var regexCss = new RegExp("(wp_enqueue_style\\('" + options.cssHandle + "',(\\s*[^,]+,){2})\\s*[^\\)]+\\);");
     var regexJs = new RegExp("(wp_register_script\\('" + options.jsHandle + "',(\\s*[^,]+,){2})\\s*[^,]+,\\s*([^\\)]+)\\);");
